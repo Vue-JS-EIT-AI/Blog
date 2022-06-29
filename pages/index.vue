@@ -46,10 +46,13 @@ created does not work because created makes request client side which is not goo
   /*
 1.  It's simillar to the  data() method     -so comment out data()method  ,
 2.  this. will not work in asyncData() method
-3.  now we can see that when we check in the live reload takes 1.5s but renders the full page with the data*/
+3.  now we can see that when we check in the live reload takes 1.5s but renders the full page with the data
+4.  check the cosole here in the cli and browser console if reload happens then only server console is used else browser console everything is autometically managed by the Nuxt*/
   asyncData(context, callback) {
     // return new Promise()
     console.log('asyncData is executed!')
+    console.log(context)
+
     setTimeout(() => {
       callback(null, {
         loadedPosts: [

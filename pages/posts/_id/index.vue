@@ -1,19 +1,50 @@
 <template>
   <div class="single-post-page">
     <section class="post">
-      <h1 class="post-title">single page post</h1>
+      <h1 class="post-title">{{loadedPosts.title}}</h1>
       <div class="post-details">
-        <div class="post-detail">Last updated on XXX</div>
-        <div class="post-detail">Written By Name</div>
+        <div class="post-detail">Last updated on -{{loadedPosts.updatedDate}}</div>
+        <div class="post-detail">Written By {{loadedPosts.author}}</div>
       </div>
       <p class="post-content">Content Of the Post</p>
     </section>
 
     <section class="post-feedback">
-      <p>Let me know what you think about the post , Send mail to -<a href="mailto:zahidprantakg@gmail.com">zahidprantakg@gmail.com</a></p>
+      <p>
+        Let me know what you think about the post , Send mail to -<a
+          href="mailto:zahidprantakg@gmail.com"
+          >zahidprantakg@gmail.com</a
+        >
+      </p>
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  /*
+  
+  */
+  //asyncData(object,method/function)
+  asyncData(context, callback) {
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: 
+          {
+            id: "1",
+            title: "first zahid -" +context.route.params.id ,
+            PreviewText: " excel it ai",
+            thumbnail: "img/imageLand.png",
+            author:'zahid',
+            updatedDate: new Date(),
+            content:'some dummy text which is not the PreviewText'
+          },
+        
+      });
+    }, 1500);
+  },
+};
+</script>
 
 <style scoped>
 .post-page {
