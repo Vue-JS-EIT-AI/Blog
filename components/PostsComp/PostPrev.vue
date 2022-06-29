@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "PostPrev",
+  name: "Postprev",
   props: {
     id: {
       type: String,

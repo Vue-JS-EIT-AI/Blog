@@ -1,13 +1,15 @@
 <template>
   <section class="posts-list">
-    <PostPrev
-      title="Home Page Of BPPS "
-      PreviewText="This is the BPP shops Home Page "
-      id="1"
-      thumbnail="img/imageLand.png"
+    <Postprev
+      v-for="post in posts"
+      :key="post.id"
+      :title="post.title"
+      :PreviewText="post.PreviewText"
+      :id="post.id"
+      :thumbnail="post.thumbnail"
       :is-admin="isAdmin"
     />
-    <PostPrev
+    <!-- <Postprev
       title="Grocery "
       PreviewText="This is the BPP shops Grocery Page "
       id="2"
@@ -15,28 +17,33 @@
       :is-admin="isAdmin"
 
     />
-    <PostPrev
+    <Postprev
       title="Fashion "
       PreviewText="This is the BPP shops Fashion Page "
       id="3"
       thumbnail="img/imageLand.png"
       :is-admin="isAdmin"
 
-    />
+    /> -->
   </section>
 </template>
 
 <script>
-import PostPrev from "@/components/PostsComp/PostPrev.Vue";
+import Postprev from "@/components/PostsComp/PostPrev.vue";
 
 export default {
-  components: { PostPrev },
-  props:{
-    isAdmin:{
-      type:Boolean,
-      default:false
-    }
-  }
+  name: "PostList",
+  components: { Postprev },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 

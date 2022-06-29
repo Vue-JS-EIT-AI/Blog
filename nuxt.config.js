@@ -58,5 +58,9 @@ export default {
         config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
       }
     }
-  }
+  },
+  // target: 'static',
+  // router: {
+  //   base: '/Blog_live/'
+  // }
 }

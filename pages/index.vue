@@ -2,10 +2,8 @@
   <div class="home-page">
     <section class="intro">
       <h1>Get The Latest company Information</h1>
-     
     </section>
-     <PostList/>
-   
+    <PostList :posts="loadedPosts" />
   </div>
 </template>
 
@@ -14,27 +12,81 @@
 import PostList from "@/components/PostsComp/PostList.Vue";
 
 export default {
-  components:{
-    PostList
-  }
-  
-}
+  components: {
+    PostList,
+  },
+  // data() {
+  //   return {
+  //     loadedPosts: [],
+  //   };
+  // },
+  /*
+created does not work because created makes request client side which is not good for SEO/*
+ What i mean is - when i run the appplication it comes without data after 1.5s data comes so it's not good for seo/*
+ for solving this problem nuxt have a solution ----- asyncData()   -----** note:   Only works in the pages
+ */
+  created() {
+    // setTimeout(() => {
+    //   this.loadedPosts = [
+    //     {
+    //       id: "1",
+    //       title: "first zahid",
+    //       PreviewText: " excel it ai",
+    //       thumbnail: "img/imageLand.png",
+    //     },
+    //     {
+    //       id: "2",
+    //       title: "2nd zahid",
+    //       PreviewText: "2  excel it ai",
+    //       thumbnail: "img/imageLand.png",
+    //     },
+    //   ];
+    // }, 1500);
+  },
+  /*
+1.  It's simillar to the  data() method     -so comment out data()method  ,
+2.  this. will not work in asyncData() method
+3.  now we can see that when we check in the live reload takes 1.5s but renders the full page with the data*/
+  asyncData(context, callback) {
+    // return new Promise()
+    console.log('asyncData is executed!')
+    setTimeout(() => {
+      callback(null, {
+        loadedPosts: [
+          {
+            id: "1",
+            title: "first zahid",
+            PreviewText: " excel it ai",
+            thumbnail: "img/imageLand.png",
+          },
+          {
+            id: "2",
+            title: "2nd zahid",
+            PreviewText: "2  excel it ai",
+            thumbnail: "img/imageLand.png",
+          },
+        ],
+      });
+    }, 1500);
+  },
+};
 </script>
 
 
 
 <style scoped>
 .intro {
-  height: 300px;
+  height: 50vh;
   position: relative;
   padding: 30px;
   box-sizing: border-box;
   background-position: center;
   background-size: cover;
-  background-image: url('~assets/images/back.jpg');
+  background-image: url("~assets/images/back.jpg");
 }
 
 .intro h1 {
+  text-align: center;
   position: absolute;
   top: 10%;
   left: 5%;
@@ -54,5 +106,4 @@ export default {
     font-size: 2rem;
   }
 }
-
 </style>

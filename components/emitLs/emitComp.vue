@@ -1,18 +1,23 @@
 <template>
   <div>
     <p>This is emit comp</p>
-    <p>{{ user }}</p>
-    <button @click="$emit('someEvent')">Hello</button>
+    <input type="text" v-model="quantity">
+    <!-- <button @click="$emit('zahid-pranta',quantity)">click button</button> -->
+    <button @click="toggleFav">click button</button>
 
-    <!-- <button @click="$emit('increaseBy', 1)">Increase by 1</button> -->
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      user: "zahid",
-    };
+  methods: {
+    toggleFav() {
+      this.$emit("zahid-pranta",this.quantity);
+    },
   },
+  data(){
+    return{
+      quantity:''
+    }
+  }
 };
 </script>

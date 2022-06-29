@@ -1,4 +1,4 @@
-<template>
+  <template>
 <div class="header-container">
   <header class="the-header">
     <TheSideNavToggle @toggle="$emit('sidenavToggle')" />
@@ -9,8 +9,10 @@
     <div class="navigation-items">
       <ul class="nav-list">
         <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/lesson">Lesson</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+
       </ul>
     </div>
   </header>
@@ -41,7 +43,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
+  background-color: #EF8341;
   z-index: 100;
   box-sizing: border-box;
   padding: 0 20px;
@@ -90,6 +92,6 @@ export default {
 .nav-item a:hover,
 .nav-item a:active,
 .nav-item a.nuxt-link-active {
-  color: red;
+  color: black;
 }
 </style>

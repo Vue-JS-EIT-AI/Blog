@@ -17,6 +17,13 @@ $ npm run start
 $ npm run generate
 ```
 
+
+## Documentation
+
+### Event Emiting
+![plot](/zDocumetation/images/event_emiting.png)
+
+
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
 ## Special Directories

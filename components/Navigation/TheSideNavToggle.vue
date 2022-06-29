@@ -6,6 +6,8 @@
     <div class="bar"></div>
     <div class="bar"></div>
     <div class="bar"></div>
+   
+
   </div>
 </template>
 <script>
@@ -34,7 +36,8 @@ export default {
 
 .drawer-toggle .bar {
   width: 90%;
-  height: 2px;
-  background-color: white;
+  height: 3.5px;
+  border-radius: 25%;
+  background-color: #777777;
 }
 </style>
