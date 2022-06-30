@@ -75,7 +75,8 @@ console.log(sum(...numbers));
   methods: {
     OnSave() {
       //save
-      console.log(this.editedpost);
+      // console.log(this.editedpost);
+      this.$emit('submit',this.editedpost)
     },
     onCancel() {
       //navigate back

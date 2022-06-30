@@ -7,7 +7,73 @@
   </div>
 </template>
 
+ <!-- Seo friendly -->
+<script>
+import PostList from "@/components/PostsComp/PostList.Vue";
 
+export default {
+  components: {
+    PostList,
+  },
+  computed:{
+    loadedPosts(){
+      return this.$store.getters.loadedPosts
+    }
+  }
+}
+
+</script>
+
+
+
+
+<!-- Not seo friendly  -->
+
+<!-- 
+<script>
+import PostList from "@/components/PostsComp/PostList.Vue";
+
+export default {
+  components: {
+    PostList,
+  },
+  data() {
+    return {
+      loadedPosts: [],
+    };
+  },
+ 
+  created() {
+    setTimeout(() => {
+      this.loadedPosts = [
+        {
+          id: "1",
+          title: "first zahid",
+          PreviewText: " excel it ai",
+          thumbnail: "img/imageLand.png",
+        },
+        {
+          id: "2",
+          title: "2nd zahid",
+          PreviewText: "2  excel it ai",
+          thumbnail: "img/imageLand.png",
+        },
+      ];
+    }, 1500);
+  },
+ 
+};
+</script>
+ -->
+
+
+
+<!-- ----------- -->
+
+
+<!-- seo friendly in the componenet but need to do it in every page instead we use the vueX state management  -->
+
+<!-- 
 <script>
 import PostList from "@/components/PostsComp/PostList.Vue";
 
@@ -73,7 +139,7 @@ created does not work because created makes request client side which is not goo
     }, 1500);
   },
 };
-</script>
+</script> -->
 
 
 

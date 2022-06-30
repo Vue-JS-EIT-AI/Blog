@@ -30,12 +30,13 @@ export default {
 
 <style scoped>
 .admin-page {
-  padding: 20px;
+  padding: 80px;
+  
 }
 
 .new-post {
   text-align: center;
-  border-bottom: 2px solid #ccc;
+  border-bottom: 2px solid rgb(139, 40, 40);
   padding-bottom: 10px;
 }
 

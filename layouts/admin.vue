@@ -8,8 +8,10 @@
         <nuxt-link to="/admin/auth"> Signin/Signup</nuxt-link>
       </div>
     </div>
+      <Nuxt />
 
-    <Nuxt />
+   
+
   </div>
 </template>
 
@@ -21,6 +23,7 @@ html {
 }
 body {
   margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -45,4 +48,5 @@ body {
 .tabs {
   margin-right: 10px;
 }
+
 </style>
