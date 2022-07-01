@@ -59,8 +59,8 @@ export default {
       }
     }
   },
-  // target: 'static',
-  // router: {
-  //   base: '/Blog_live/'
-  // }
+  target: 'static',
+  router: {
+    base: '/Blog_live/'
+  }
 }

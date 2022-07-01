@@ -8,7 +8,9 @@
     <div class="spacer"></div>
     <div class="navigation-items">
       <ul class="nav-list">
-        <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/posts">Server R post</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/postsStat">Client R post</nuxt-link></li>
+
         <li class="nav-item"><nuxt-link to="/lesson">Lesson</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>

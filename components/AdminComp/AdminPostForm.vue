@@ -4,7 +4,7 @@
 
     <AppControlInput v-model="editedpost.title">Title</AppControlInput>
 
-    <AppControlInput v-model="editedpost.thumbnailLink"
+    <AppControlInput v-model="editedpost.thumbnail"
       >Thumbnail Link</AppControlInput
     >
 
@@ -67,7 +67,7 @@ console.log(sum(...numbers));
        {
         author: "",
         title: "",
-        thumbnailLink: "",
+        thumbnail: "",
         content: "",
       },
     };
