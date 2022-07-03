@@ -8,6 +8,9 @@
       >Thumbnail Link</AppControlInput
     >
 
+    <AppControlInput control-type="textarea" v-model="editedpost.PreviewText"
+      >previewText</AppControlInput
+    >
     <AppControlInput control-type="textarea" v-model="editedpost.content"
       >Content</AppControlInput
     >
@@ -69,6 +72,7 @@ console.log(sum(...numbers));
         title: "",
         thumbnail: "",
         content: "",
+        PreviewText:''
       },
     };
   },

@@ -6,7 +6,7 @@
         <div class="post-detail">Last updated on -{{loadedPosts.updatedDate}}</div>
         <div class="post-detail">Written By {{loadedPosts.author}}</div>
       </div>
-      <p class="post-content">Content Of the Post</p>
+      <p class="post-content">Content Of the Post :<b>{{loadedPosts.content}}</b></p>
     </section>
 
     <section class="post-feedback">
@@ -21,12 +21,32 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
+
+  //remove callback because we don't want nuxt to waited to call 
+asyncData(context){
+  return axios.get('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/'+context.params.id+'.json')
+  .then(res=>{
+    return{
+      loadedPosts:res.data
+    }
+  })
+  .catch(e=>context.error(e))
+
+},
+created(){
+console.log(this.loadedPosts)
+}
+
+
+
   /*
   
   */
   //asyncData(object,method/function)
-  asyncData(context, callback) {
+ /* asyncData(context, callback) {
     setTimeout(() => {
       callback(null, {
         loadedPosts: 
@@ -43,6 +63,7 @@ export default {
       });
     }, 1500);
   },
+  */
 };
 </script>
 

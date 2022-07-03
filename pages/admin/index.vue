@@ -7,7 +7,7 @@
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <PostList isAdmin />
+      <PostList isAdmin :posts="loadedPosts"/>
     </section>
   </div>
 </template>
@@ -24,7 +24,12 @@ export default {
     PostList,
     AppButton,
   },
-};
+  computed:{
+    loadedPosts(){
+      return this.$store.getters.loadedPosts
+    }
+}
+}
 </script>
 
 
@@ -42,5 +47,6 @@ export default {
 
 .existing-posts h1 {
   text-align: center;
+  /* background-color: aqua; */
 }
 </style>

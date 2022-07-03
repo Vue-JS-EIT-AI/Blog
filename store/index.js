@@ -17,27 +17,36 @@ const createStore = () => {
             mutations: {
                 setPosts(state, posts) {
                     state.loadedPosts = posts
-                }
+                },
+                addpost(state, post) {
+                    state.loadedPosts.push(post)
+                },
+                editpost(state, editedPost) {
+                    const PostIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id);
+                    state.loadedPosts[PostIndex] = editedPost
+                },
+
+
             },
             actions: {
                 //Special action by vuejs
                 /**
                  * 1  This function is dispatched by the nuxt
                  */
-                nuxtServerInit(vuexContext,context){
+                nuxtServerInit(vuexContext, context) {
                     console.log('servers side rendering')
 
                     return axios.get('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json')
-                    .then(res=>{
-                        const postarray=[]
-                        for (const key in res.data){
-                            postarray.push({...res.data[key],id:key})
+                        .then(res => {
+                            const postarray = []
+                            for (const key in res.data) {
+                                postarray.push({ ...res.data[key], id: key })
 
-                        }
-                        vuexContext.commit('setPosts',postarray)
+                            }
+                            vuexContext.commit('setPosts', postarray)
 
-                    })
-                    .catch(e =>context.error(e));
+                        })
+                        .catch(e => context.error(e));
 
                     // return new Promise((resolve, reject) => {
                     //     setTimeout(() => {
@@ -63,10 +72,37 @@ const createStore = () => {
                     //           ])
                     //       resolve();
                     //     }, 1500);
-                
+
                     //   }) 
-                    
+
                 },
+                addpost(vuexContext, post) {
+                    const createdPost = { ...post, updatedDate: new Date() }
+                    return axios
+                        .post(
+                            "https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json", createdPost
+
+                        )
+                        .then((res) => {
+                            vuexContext.commit('addpost', {...createdPost,id:res.data.name})
+ 
+                        })
+                        .catch((e) => console.log(e));
+                },
+                editpost(vuexContext, editedPost) {
+
+                  return  axios.put('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/'+editedPost.id+'.json', editedPost)
+                    .then(res=> {
+                        vuexContext.commit('editpost', editedPost)
+                     
+                    })
+                    .catch(e=>console.log(e))
+                   
+                
+                 },
+
+
+
                 setPosts(vuexContext, posts) {
                     vuexContext.commit('setPosts', posts)
                 }
