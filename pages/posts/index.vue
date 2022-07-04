@@ -8,11 +8,15 @@
 
 
 <script>
-import PostList from "@/components/PostsComp/PostList.Vue";
+// PostList imported in the plugins folder core-components file and made global componenet
+
+// import PostList from "@/components/PostsComp/PostList.Vue";
 
 export default {
+  middleware: 'log',
   components: {
-    PostList,
+    // PostList imported in the plugins folder core-components file and made global componenet
+    // PostList,
   },
   computed: {
     loadedPosts() {

@@ -15,14 +15,16 @@
 
 
 <script>
-import PostList from "@/components/PostsComp/PostList.Vue";
-import AppButton from "@/components/UI/AppButton.vue";
+        // component imported in the plugins folder core-components file and made global componenet
+
+// import PostList from "@/components/PostsComp/PostList.Vue";
+// import AppButton from "@/components/UI/AppButton.vue";
 
 export default {
   layout:'admin',
   components: {
-    PostList,
-    AppButton,
+    // PostList,
+    // AppButton,
   },
   computed:{
     loadedPosts(){

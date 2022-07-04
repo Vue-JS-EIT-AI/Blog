@@ -9,11 +9,14 @@
 
  <!-- Seo friendly -->
 <script>
-import PostList from "@/components/PostsComp/PostList.Vue";
+
+//imported in the plugins folder core-components file.
+// import PostList from "@/components/PostsComp/PostList.Vue";
 
 export default {
   components: {
-    PostList,
+//imported in the plugins folder core-components file and made global componenet
+    // PostList,
   },
   computed:{
     loadedPosts(){

@@ -10,6 +10,10 @@
     <Theform/>
     <hr/>
     <emiting2 />
+
+    <div class="csstest">
+      Check asset folders css/ main.css and nuxt.config.css in the css
+    </div>
   <button @click="emit2Work">emit2</button>
   </div>
 </template>

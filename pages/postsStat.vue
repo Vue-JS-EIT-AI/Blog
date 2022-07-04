@@ -5,11 +5,14 @@
 
 <script>
 import axios from 'axios'
-import PostList from "@/components/PostsComp/PostList.Vue";
+        // PostList imported in the plugins folder core-components file and made global componenet
+// import PostList from "@/components/PostsComp/PostList.Vue";
 
 export default {
      components: {
-    PostList,
+        // PostList imported in the plugins folder core-components file and made global componenet
+        
+    // PostList,
   },
     data(){
         return {
@@ -17,7 +20,8 @@ export default {
         }
     },
     created(){
-       axios.get('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json')
+       axios.get(process.env.baseURL+'/posts.json')
+       //check the nuxt config --env
                     .then(res=>{
                         // const postarray=[]
                         for (const key in res.data){
@@ -28,6 +32,9 @@ export default {
                     })
                     .catch(e =>context.error(e));
     },
+    head:{
+        title:'nuxt client side rendering'
+    }
  
 }
 </script>

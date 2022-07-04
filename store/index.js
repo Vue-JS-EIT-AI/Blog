@@ -36,7 +36,8 @@ const createStore = () => {
                 nuxtServerInit(vuexContext, context) {
                     console.log('servers side rendering')
 
-                    return axios.get('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json')
+                    //check the nuxt config --env
+                    return axios.get(process.env.baseURL + '/posts.json')
                         .then(res => {
                             const postarray = []
                             for (const key in res.data) {
@@ -84,27 +85,58 @@ const createStore = () => {
 
                         )
                         .then((res) => {
-                            vuexContext.commit('addpost', {...createdPost,id:res.data.name})
- 
+                            vuexContext.commit('addpost', { ...createdPost, id: res.data.name })
+
                         })
                         .catch((e) => console.log(e));
                 },
                 editpost(vuexContext, editedPost) {
 
-                  return  axios.put('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/'+editedPost.id+'.json', editedPost)
-                    .then(res=> {
-                        vuexContext.commit('editpost', editedPost)
-                     
-                    })
-                    .catch(e=>console.log(e))
-                   
-                
-                 },
+                    return axios.put('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/' + editedPost.id + '.json', editedPost)
+                        .then(res => {
+                            vuexContext.commit('editpost', editedPost)
+
+                        })
+                        .catch(e => console.log(e))
+
+
+                },
 
 
 
                 setPosts(vuexContext, posts) {
                     vuexContext.commit('setPosts', posts)
+                },
+                authenticateUser(state, authData) {
+                    let authUrl = "";
+                    if (!authData.isLogin) {
+                        authUrl =
+                            "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" +
+                            process.env.firebaseApiKey;
+                    } else {
+                        authUrl =
+                            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+                            process.env.firebaseApiKey;
+
+                        console.log("login is on the construction ");
+                    }
+                    axios
+                        .post(
+                            authUrl,
+
+                            {
+                                email: authData.email,
+                                password: authData.password,
+                                returnSecureToken: true,
+                            }
+                        )
+
+                        .then((res) => {
+                            console.log(res);
+                        })
+                        .catch((e) => console.log(e));
+
+
                 }
             },
             getters: {
