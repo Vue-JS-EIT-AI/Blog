@@ -11,7 +11,8 @@ const createStore = () => {
     return new Vuex.Store(
         {
             state: {
-                loadedPosts: []
+                loadedPosts: [],
+                token:null
 
             },
             mutations: {
@@ -25,6 +26,12 @@ const createStore = () => {
                     const PostIndex = state.loadedPosts.findIndex(post => post.id === editedPost.id);
                     state.loadedPosts[PostIndex] = editedPost
                 },
+                setToken(state,token){
+                    state.token=token
+                },
+                clearToken(state){
+                    state.token=null
+                }
 
 
             },
@@ -81,7 +88,7 @@ const createStore = () => {
                     const createdPost = { ...post, updatedDate: new Date() }
                     return axios
                         .post(
-                            "https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json", createdPost
+                            "https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts.json?auth=" + vuexContext.state.token, createdPost
 
                         )
                         .then((res) => {
@@ -90,6 +97,24 @@ const createStore = () => {
                         })
                         .catch((e) => console.log(e));
                 },
+                
+                                    //with authentication
+
+                editpost(vuexContext, editedPost) {
+
+                    return axios.put('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/' + editedPost.id + '.json?auth=' + vuexContext.state.token, editedPost)
+                        .then(res => {
+                            vuexContext.commit('editpost', editedPost)
+
+                        })
+                        .catch(e => console.log(e))
+
+
+                },
+
+                        //without authentication
+
+                /*
                 editpost(vuexContext, editedPost) {
 
                     return axios.put('https://nuxt-blogs-c16de-default-rtdb.firebaseio.com/posts/' + editedPost.id + '.json', editedPost)
@@ -100,14 +125,14 @@ const createStore = () => {
                         .catch(e => console.log(e))
 
 
-                },
+                },*/
 
 
 
                 setPosts(vuexContext, posts) {
                     vuexContext.commit('setPosts', posts)
                 },
-                authenticateUser(state, authData) {
+                authenticateUser(vuexContext, authData) {
                     let authUrl = "";
                     if (!authData.isLogin) {
                         authUrl =
@@ -118,9 +143,9 @@ const createStore = () => {
                             "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
                             process.env.firebaseApiKey;
 
-                        console.log("login is on the construction ");
+                        console.log("login is loading");
                     }
-                    axios
+                    return axios
                         .post(
                             authUrl,
 
@@ -132,16 +157,38 @@ const createStore = () => {
                         )
 
                         .then((res) => {
+                            vuexContext.commit('setToken',res.data.idToken)
+                            localStorage.setItem('token',res.data.idToken)
+                            vuexContext.dispatch('setLogoutTimer',res.data.expiresIn*1000)
+                            localStorage.setItem('tokenExpiration',new Date().getTime()+ res.data.idToken*1000)
+
                             console.log(res);
                         })
                         .catch((e) => console.log(e));
 
 
+                },
+                setLogoutTimer(vuexContext, duration){
+                    setTimeout(()=>{
+                        vuexContext.commit('clearToken')
+                    },duration)
+                },
+                initauth(vuexContext){
+                    const token=localStorage.getItem('token');
+                    const expirationDate=localStorage.getItem('tokenExpiration');
+                    if(new Date().getTime()> +expirationDate || !token){
+                        return;
+                    }
+                    vuexContext.dispatch('setLogoutTimer', +expirationDate - new Date().getTime())
+                    vuexContext.commit('setToken',token);
                 }
             },
             getters: {
                 loadedPosts(state) {
                     return state.loadedPosts
+                },
+                isAuthenticated(state){
+                    return state.token !=null
                 }
             }
         }

@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import '@/plugins/date-filter.js'
 import axios from "axios";
 
 export default {

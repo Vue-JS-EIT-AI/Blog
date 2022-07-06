@@ -4,9 +4,9 @@
         
       <div class="tab0"> <nuxt-link to="/"> Home</nuxt-link></div>
       <div class="tab1"></div>
-      <div class="tabs">
+      <!-- <div class="tabs">
         <nuxt-link to="/admin/auth"> Signin/Signup</nuxt-link>
-      </div>
+      </div> -->
     </div>
       <Nuxt />
 
@@ -14,6 +14,16 @@
 
   </div>
 </template>
+
+<script>
+export default {
+  // middleware:'auth',
+  middleware:['check-auth','auth',]   // if we needed multiple middleware
+  
+
+
+}
+</script>
 
 
 

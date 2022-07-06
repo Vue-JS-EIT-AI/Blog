@@ -28,7 +28,7 @@ import axios from "axios";
 
 export default {
   name: "AdminAuthPage",
-  layout: "admin",
+  // layout: "admin",
   components: {
     AppControlInput,
     AppButton,
@@ -42,6 +42,14 @@ export default {
   },
   methods: {
     OnSubmit() {
+
+      this.$store.dispatch('authenticateUser',{
+        isLogin:this.isLogin,
+        email:this.email,
+        password:this.password
+      }).then(()=>{
+        this.$router.push('/admin');
+      })
 
       // we implemented this in the store authenticateUser
 
